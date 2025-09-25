@@ -1,0 +1,256 @@
+ /* ========================
+   Global Reset & Fonts
+======================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  color: #2d3436;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ========================
+   Navbar
+======================== */
+.navbar {
+  background: #2c3e50;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.navbar h1 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.navbar a {
+  color: #ecf0f1;
+  text-decoration: none;
+  margin-left: 15px;
+  font-size: 13px;
+  transition: 0.2s;
+}
+
+.navbar a:hover {
+  color: #1abc9c;
+}
+
+/* ========================
+   Main Container
+======================== */
+.container {
+  max-width: 700px; /* smaller width */
+  margin: 30px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ========================
+   Headings
+======================== */
+h1 {
+  color: #ffffff;
+  font-weight: 600;
+}
+h2, h3 {
+  color: #2c3e50;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+p {
+  margin-bottom: 12px;
+  color: #555;
+  font-size: 14px;
+}
+
+/* ========================
+   Buttons
+======================== */
+.btn, button, input[type="submit"] {
+  display: inline-block;
+  background: #1abc9c;
+  color: #fff;
+  padding: 8px 16px; /* smaller */
+  margin: 6px 4px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 13px;
+  transition: 0.2s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.btn:hover, button:hover, input[type="submit"]:hover {
+  background: #16a085;
+}
+
+.btn-secondary {
+  background: #7f8c8d;
+}
+.btn-secondary:hover {
+  background: #636e72;
+}
+
+/* ========================
+   Forms
+======================== */
+form {
+  text-align: left;
+  margin-top: 15px;
+}
+
+label {
+  display: block;
+  font-weight: 500;
+  margin: 10px 0 5px;
+}
+
+input[type="text"], 
+input[type="password"], 
+textarea, 
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+  background: #fff;
+  transition: 0.2s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: #1abc9c;
+  outline: none;
+  box-shadow: 0 0 4px rgba(26, 188, 156, 0.3);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ========================
+   Requests List
+======================== */
+.requests-list {
+  margin-top: 20px;
+}
+
+.requests-list li {
+  background: #f9fbfc;
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border-left: 4px solid #1abc9c;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.requests-list li strong {
+  display: block;
+  color: #2c3e50;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+/* ========================
+   Admin Panel Table
+======================== */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+  font-size: 13px;
+}
+
+.admin-table th, .admin-table td {
+  border: 1px solid #e1e1e1;
+  padding: 10px;
+  text-align: left;
+}
+
+.admin-table th {
+  background: #2c3e50;
+  color: #fff;
+  font-weight: 500;
+}
+
+.admin-table tr:nth-child(even) {
+  background: #f8f9fa;
+}
+/* ========================
+   Sidebar
+======================== */
+.sidebar {
+  width: 220px;
+  background: #2c3e50;
+  color: #fff;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h1 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.sidebar a {
+  color: #ecf0f1;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  transition: background 0.3s;
+  font-size: 14px;
+}
+
+.sidebar a:hover {
+  background: #1abc9c;
+}
+
+/* ========================
+   Main Content
+======================== */
+.main-content {
+  margin-left: 220px; /* same as sidebar width */
+  padding: 20px;
+  flex: 1;
+}
+
+/* ========================
+   Responsive
+======================== */
+@media (max-width: 768px) {
+  .sidebar {
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .sidebar h1 {
+    display: none;
+  }
+  .main-content {
+    margin-left: 0;
+    margin-top: 60px;
+  }
+}

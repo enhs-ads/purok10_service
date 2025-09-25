@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barangay Service Requests</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h1>Barangay Service Portal</h1>
+    <a href="{{ url_for('index') }}">🏠 Home</a>
+    <a href="{{ url_for('submit') }}">➕ Submit Request</a>
+    <a href="{{ url_for('requests_list') }}">📋 View Requests</a>
+    <a href="{{ url_for('login') }}">🔑 Admin Login</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="container">
+      <h2>Welcome to Barangay Service Requests</h2>
+      <p>
+        Report issues like <strong>broken streetlights</strong>, 
+        <strong>garbage pickup</strong>, or <strong>water leaks</strong>.
+      </p>
+      
+      <a class="btn" href="{{ url_for('submit') }}">➕ Submit a Request</a>
+      <a class="btn btn-secondary" href="{{ url_for('requests_list') }}">📋 View Requests</a>
+    </div>
+  </div>
+</body>
+</html>

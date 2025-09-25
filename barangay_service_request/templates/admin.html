@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Panel - Barangay Requests</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Top Navbar */
+    .navbar {
+      width: 100%;
+      background: #2c3e50;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .navbar h2 {
+      font-size: 20px;
+      margin: 0;
+      margin-right: 40px;
+    }
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      margin-right: 20px;
+      padding: 6px 12px;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+    .navbar a:hover {
+      background: #1a252f;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 20px;
+      margin-top: 10px;
+    }
+    .main h2 {
+      margin-bottom: 20px;
+      font-size: 24px;
+      color: #2c3e50;
+    }
+
+    /* Card container */
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 20px;
+      overflow-x: auto;
+    }
+
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    table th, table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid #ddd;
+      text-align: left;
+      vertical-align: top;
+    }
+    table th {
+      background: #2c3e50;
+      color: white;
+      font-size: 14px;
+    }
+    table tr:hover {
+      background: #f9f9f9;
+    }
+
+    td.issue-cell {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-width: 250px;
+    }
+
+    img {
+      max-width: 80px;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    button.update {
+      background: #3498db;
+      color: white;
+    }
+    button.update:hover {
+      background: #217dbb;
+    }
+    button.delete {
+      background: #e74c3c;
+      color: white;
+    }
+    button.delete:hover {
+      background: #c0392b;
+    }
+    select {
+      padding: 5px;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .navbar a {
+        margin: 5px 0;
+      }
+      table, thead, tbody, th, td, tr {
+        display: block;
+        width: 100%;
+      }
+      thead {
+        display: none;
+      }
+      tr {
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: #fff;
+        padding: 10px;
+      }
+      td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 5px;
+      }
+      td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        margin-right: 10px;
+        color: #2c3e50;
+      }
+      td.issue-cell {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Top Navbar -->
+  <div class="navbar">
+    <h2>Admin Panel</h2>
+    <a href="{{ url_for('index') }}">🏠 Home</a>
+    <a href="{{ url_for('requests_list') }}">📋 View Requests</a>
+    <a href="{{ url_for('logout') }}">🚪 Logout</a>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <h2>Manage Requests</h2>
+    <div class="card">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Resident</th>
+            <th>Issue</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Photo</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for req in requests %}
+          <tr>
+            <td data-label="ID">{{ req[0] }}</td>
+            <td data-label="Resident">{{ req[1] }}</td>
+            <td data-label="Issue" class="issue-cell">{{ req[2] }}</td>
+            <td data-label="Location">{{ req[3] }}</td>
+            <td data-label="Date">{{ req[4] }}</td>
+            <td data-label="Status">{{ req[5] }}</td>
+            <td data-label="Photo">
+              {% if req[6] %}
+                <img src="{{ url_for('static', filename='uploads/' ~ req[6]) }}" alt="Issue photo">
+              {% else %}
+                No photo
+              {% endif %}
+            </td>
+            <td data-label="Action">
+              <form method="post" style="margin-bottom: 5px;">
+                <input type="hidden" name="id" value="{{ req[0] }}">
+                <select name="status">
+                  <option value="Pending" {% if req[5] == "Pending" %}selected{% endif %}>Pending</option>
+                  <option value="In Progress" {% if req[5] == "In Progress" %}selected{% endif %}>In Progress</option>
+                  <option value="Resolved" {% if req[5] == "Resolved" %}selected{% endif %}>Resolved</option>
+                </select>
+                <button type="submit" class="update">Update</button>
+              </form>
+              <form method="post" action="{{ url_for('delete_request', req_id=req[0]) }}">
+                <button type="submit" class="delete">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Request</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>Submit a Service Request</h2>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="name">Your Name:</label>
+        <input type="text" name="name" required>
+
+        <label for="issue">Issue:</label>
+        <textarea name="issue" required></textarea>
+
+        <label for="location">Location:</label>
+        <input type="text" name="location" required>
+
+        <label for="photo">Upload Photo (optional):</label>
+        <input type="file" name="photo" accept="image/*">
+
+        <input type="submit" value="Submit Request" class="btn">
+    </form>
+</div>
+
+</body>
+</html>
